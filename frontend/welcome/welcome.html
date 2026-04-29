@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Welcome to Korax</title>
+	<!-- Use the login/signup stylesheet to enforce the exact green/white/black theme -->
+	<link rel="stylesheet" href="../login_signup/login.css">
+	<!-- Small overrides so the welcome layout uses the sign-in theme but can be wide and responsive -->
+	<style>
+	  /* Base layout adjustments */
+	  body { overflow-x: hidden; position: relative; }
+	  
+	  /* widen the card for the welcome hero while keeping theme variables from login.css */
+	  .card.card--wide{max-width:1100px;padding:0;border-radius:24px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.5); transform: translateY(0); transition: transform 0.3s ease; animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+	  .card.card--wide:hover { transform: translateY(-5px); }
+	  
+	  @keyframes fadeInUp {
+	    from { opacity: 0; transform: translateY(30px); }
+	    to { opacity: 1; transform: translateY(0); }
+	  }
+
+	  @keyframes fadeIn {
+	    from { opacity: 0; }
+	    to { opacity: 1; }
+	  }
+
+	  .hero-content h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+	  .hero-content .lead { animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both; }
+	  .hero-actions { animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+
+	  @keyframes fadeInLeft {
+	    from { opacity: 0; transform: translateX(-20px); }
+	    to { opacity: 1; transform: translateX(0); }
+	  }
+
+	  .hero-media { width:460px; flex-shrink:0; animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+	  
+	  @keyframes fadeInRight {
+	    from { opacity: 0; transform: translateX(20px); }
+	    to { opacity: 1; transform: translateX(0); }
+	  }
+
+	  .container{width:100%;padding:0 1.25rem}
+	  .hero-inner{display:flex;gap:3rem;padding: 2rem 0;align-items:center}
+	  .hero-content h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; }
+	  
+	  .hero-media{width:460px;flex-shrink:0}
+	  .media-box{height:320px;border-radius:20px;display:flex;align-items:center;justify-content:center;color:var(--muted);background:rgba(22, 163, 74, 0.06); border: 1px solid rgba(22, 163, 74, 0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+	  
+	  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem; margin-top: 2rem;}
+	  .card.feature{ background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 20px; padding: 2rem; cursor:pointer;transition:all .3s cubic-bezier(0.16, 1, 0.3, 1)}
+	  .card.feature:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,0,0,0.08); background: rgba(255, 255, 255, 0.9); }
+	  .card.feature h4 { color: var(--green-600); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; }
+	  
+	  .card.feature.expanded{grid-column:1 / -1;background:rgba(22,163,74,0.03)}
+	  
+	  /* reveal animation */
+	  .feature{opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)}
+	  .feature.visible{opacity:1;transform:none}
+	  .feature:nth-child(2) { transition-delay: 0.1s; }
+	  .feature:nth-child(3) { transition-delay: 0.2s; }
+	  
+	  .site-header { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(15px); background: rgba(255, 255, 255, 0.6); border-bottom: 1px solid rgba(0,0,0,0.03); padding: 0.75rem 0; animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+
+	  @keyframes fadeInDown {
+	    from { opacity: 0; transform: translateY(-20px); }
+	    to { opacity: 1; transform: translateY(0); }
+	  }
+	  .header-content { display: flex; align-items: center; justify-content: space-between; }
+	  
+	  /* Beautified interactive nav links */
+	  .nav { display: flex; gap: 0.5rem; align-items: center; }
+	  .nav-link { 
+	    padding: 0.6rem 1.2rem; 
+	    border-radius: 12px; 
+	    font-size: 0.95rem; 
+	    font-weight: 600; 
+	    color: var(--black); 
+	    text-decoration: none; 
+	    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	    position: relative;
+	  }
+	  .nav-link:not(.signup-special):hover { 
+	    background: rgba(22, 163, 74, 0.08); 
+	    color: var(--green-600);
+	    transform: translateY(-1px);
+	  }
+	  
+	  /* Special styling for Sign Up to make it stand out */
+	  .signup-special {
+	    background: var(--green-500);
+	    color: var(--white);
+	    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
+	  }
+	  .signup-special:hover {
+	    background: var(--green-600);
+	    transform: translateY(-2px);
+	    box-shadow: 0 8px 20px rgba(22, 163, 74, 0.3);
+	  }
+	  
+	  /* Logo interactivity */
+	  .logo { 
+	    cursor: pointer; 
+	    transition: transform 0.3s ease; 
+	    font-weight: 900;
+	    letter-spacing: -1px;
+	  }
+	  .logo:hover { transform: scale(1.05); }
+	  
+	  @media (max-width:900px){
+	    .hero-inner{flex-direction:column-reverse; text-align: center; gap: 2rem; }
+	    .hero-actions { justify-content: center; }
+	    .hero-media{width:100%}
+	    .grid{grid-template-columns:1fr}
+	  }
+	</style>
+</head>
+<body>
+	<div class="bg-animation">
+		<div class="circle"></div>
+		<div class="circle"></div>
+		<div class="circle"></div>
+	</div>
+	<!-- Top navigation: add links as needed -->
+	<header class="site-header">
+		<div class="container header-content">
+			<h2 class="logo">Korax</h2>
+			<nav class="nav">
+				<a href="../login_signup/login.html" id="nav-login" class="nav-link">Login</a>
+				<a href="../login_signup/login.html" id="nav-signup" class="nav-link signup-special">Sign Up</a>
+				<a href="../employer_login/emp_login.html" id="nav-employer" class="nav-link">Employer</a>
+			</nav>
+		</div>
+	</header>
+
+	<!-- Hero inside a wide themed card so layout matches the sign-in UI -->
+	<main class="wrapper">
+		<section class="card card--wide">
+			<div class="card-body">
+				<div class="hero">
+					<div class="container hero-inner">
+						<div class="hero-content">
+							<h1>Welcome to Korax</h1>
+							<p class="lead">A lightweight platform to manage your workflows and collaborate seamlessly. This is a starter page — replace this text with your platform's mission and value propositions.</p>				</div>
+						<div class="hero-media">
+							<!-- Placeholder illustration: replace with project screenshot or SVG -->
+							<div class="media-box">Illustration / screenshot</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- Features: add or remove cards as necessary -->
+	<section id="features" class="features container">
+		<h3>Key features</h3>
+		<div class="grid">
+			<article class="card feature">
+				<h4>Fast setup</h4>
+				<p>Get started quickly with sensible defaults and an intuitive UI.</p>
+			</article>
+			<article class="card feature">
+				<h4>Collaboration</h4>
+				<p>Invite teammates, assign tasks, and keep everyone in sync.</p>
+			</article>
+			<article class="card feature">
+				<h4>Secure</h4>
+				<p>Built with best practices for authentication and data protection.</p>
+			</article>
+		</div>
+	</section>
+
+	<!-- Footer: add links, legal, social as desired -->
+	<footer class="site-footer">
+		<div class="container">
+			<p>© <span id="year"></span> Korax — All rights reserved.</p>
+			<small class="muted">This is sample copy. Update with your company details and links.</small>
+		</div>
+	</footer>
+
+	<script src="welcome.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Login / Sign Up</title>
+	<link rel="stylesheet" href="login.css">
+</head>
+<body>
+	<div class="bg-animation">
+		<div class="circle"></div>
+		<div class="circle"></div>
+		<div class="circle"></div>
+	</div>
+	<main class="wrapper">
+		<section class="card">
+			<div class="card-header">
+				<h1 class="brand">Korax</h1>
+				<div class="toggle">
+					<button id="show-login" class="toggle-btn active">Login</button>
+					<button id="show-signup" class="toggle-btn">Sign Up</button>
+				</div>
+			</div>
+
+			<div class="card-body">
+				<form id="login-form" class="form" autocomplete="off">
+					<label class="field">
+						<span>Email</span>
+						<input type="email" name="email" required />
+					</label>
+					<label class="field">
+						<span>Password</span>
+						<input type="password" name="password" required minlength="6" />
+					</label>
+					<button type="submit" class="btn btn-primary">Sign in</button>
+				</form>
+
+				<form id="signup-form" class="form hidden" autocomplete="off">
+					<label class="field">
+						<span>Full name</span>
+						<input type="text" name="name" required />
+					</label>
+					<label class="field">
+						<span>Email</span>
+						<input type="email" name="email" required />
+					</label>
+					<label class="field">
+						<span>Password</span>
+						<input type="password" name="password" required minlength="6" />
+					</label>
+					<label class="field">
+						<span>Confirm password</span>
+						<input type="password" name="confirm" required minlength="6" />
+					</label>
+					<button type="submit" class="btn btn-outline">Create account</button>
+				</form>
+			</div>
+			<div id="message" class="message" aria-live="polite"></div>
+		</section>
+	</main>
+
+	<script src="login.js"></script>
+</body>
+</html>
+
