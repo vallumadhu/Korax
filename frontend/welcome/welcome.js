@@ -78,5 +78,96 @@ document.addEventListener('DOMContentLoaded', function(){
 		media.style.transition = 'transform .5s ease';
 		requestAnimationFrame(()=> media.style.transform = 'scale(1)');
 	}
+
+  /* ---- Intersection Observer for Info Blocks ---- */
+  const observerOptions = {
+    threshold: 0.2
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.info-block').forEach(block => {
+    observer.observe(block);
+  });
+
+  /* ---- Three.js Background Effect ---- */
+  initThreeBackground();
 });
 
+function initThreeBackground() {
+  const container = document.getElementById('three-canvas-container');
+  if (!container) return;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  container.appendChild(renderer.domElement);
+
+  // Create a particle system
+  const particlesCount = 1500;
+  const positions = new Float32Array(particlesCount * 3);
+  const colors = new Float32Array(particlesCount * 3);
+  
+  const greenColor = new THREE.Color('#16a34a');
+
+  for (let i = 0; i < particlesCount * 3; i++) {
+    positions[i] = (Math.random() - 0.5) * 10;
+    if (i % 3 === 0) colors[i] = greenColor.r;
+    if (i % 3 === 1) colors[i] = greenColor.g;
+    if (i % 3 === 2) colors[i] = greenColor.b;
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  const material = new THREE.PointsMaterial({
+    size: 0.015,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.4,
+    blending: THREE.AdditiveBlending
+  });
+
+  const points = new THREE.Points(geometry, material);
+  scene.add(points);
+
+  camera.position.z = 3;
+
+  // Mouse interaction
+  let mouseX = 0;
+  let mouseY = 0;
+  document.addEventListener('mousemove', (event) => {
+    mouseX = (event.clientX / window.innerWidth) - 0.5;
+    mouseY = (event.clientY / window.innerHeight) - 0.5;
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    
+    // Smooth rotation
+    points.rotation.y += 0.001;
+    points.rotation.x += 0.0005;
+
+    // React to mouse
+    points.rotation.y += mouseX * 0.05;
+    points.rotation.x += mouseY * 0.05;
+
+    renderer.render(scene, camera);
+  }
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  animate();
+}

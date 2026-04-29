@@ -96,22 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Export skills as JSON file
-  if(exportBtn){
-    exportBtn.addEventListener('click', ()=>{
-      const skills = loadSkills();
-      const blob = new Blob([JSON.stringify(skills, null, 2)], {type:'application/json'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'korax-skills.json';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    });
-  }
-
   // close modal on outside click
   if(addSkillModal){
     addSkillModal.addEventListener('click', (e)=>{

@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Employer Login — Korax</title>
-  <!-- Reuse the strict theme from sign-in styles -->
-  <link rel="stylesheet" href="../login_signup/login.css">
-  <link rel="stylesheet" href="emp_login.css">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Employer Login - Korax</title>
+	<!-- Inherit the main theme from the sign-in page -->
+	<link rel="stylesheet" href="../login_signup/login.css">
+	<link rel="stylesheet" href="emp_login.css">
 </head>
 <body>
 	<div class="bg-animation">
@@ -15,44 +15,29 @@
 		<div class="circle"></div>
 	</div>
 	<main class="wrapper">
-    <section class="card">
-      <div class="card-header">
-        <h1 class="brand">Korax — Employer</h1>
-        <div class="toggle">
-          <a href="../login_signup/login.html" class="toggle-btn">Candidate</a>
-        </div>
-      </div>
+		<section class="card">
+			<div class="card-header">
+				<h1 class="brand">Korax</h1>
+				<p style="text-align:center; font-weight:700; color:var(--green-600); margin-top:-0.5rem;">Employer Portal</p>
+			</div>
 
-      <div class="card-body">
-        <!-- Employer login form. Add additional fields or verification hooks as needed. -->
-        <form id="emp-login-form" class="form" autocomplete="off">
-          <label class="field">
-            <span>Company name</span>
-            <input type="text" name="company" required />
-          </label>
+			<div class="card-body">
+				<form id="employer-login-form" class="form" autocomplete="off">
+					<label class="field">
+						<span>Company Email</span>
+						<input type="email" name="email" placeholder="hr@company.com" required />
+					</label>
+					<label class="field">
+						<span>Password</span>
+						<input type="password" name="password" required minlength="6" />
+					</label>
+					<button type="submit" class="btn btn-primary">Employer Log in</button>
+				</form>
+			</div>
+			<div id="emp-message" class="message" aria-live="polite"></div>
+		</section>
+	</main>
 
-          <label class="field">
-            <span>Company code</span>
-            <input type="text" name="company_code" required />
-          </label>
-
-          <label class="field">
-            <span>Email</span>
-            <input type="email" name="email" required />
-          </label>
-
-          <label class="field">
-            <span>Password</span>
-            <input type="password" name="password" required minlength="6" />
-          </label>
-
-          <button type="submit" class="btn btn-primary">Sign in as employer</button>
-        </form>
-      </div>
-      <div id="emp-message" class="message" aria-live="polite"></div>
-    </section>
-  </main>
-
-  <script src="emp_login.js"></script>
+	<script src="emp_login.js"></script>
 </body>
 </html>

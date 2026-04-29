@@ -4,12 +4,14 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<title>Welcome to Korax</title>
+	<!-- Three.js for cool background effects -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 	<!-- Use the login/signup stylesheet to enforce the exact green/white/black theme -->
 	<link rel="stylesheet" href="../login_signup/login.css">
 	<!-- Small overrides so the welcome layout uses the sign-in theme but can be wide and responsive -->
 	<style>
 	  /* Base layout adjustments */
-	  body { overflow-x: hidden; position: relative; }
+	  body { overflow-x: hidden; position: relative; overflow-y: auto !important; height: auto !important; }
 	  
 	  /* widen the card for the welcome hero while keeping theme variables from login.css */
 	  .card.card--wide{max-width:1100px;padding:0;border-radius:24px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.5); transform: translateY(0); transition: transform 0.3s ease; animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -41,17 +43,94 @@
 	    to { opacity: 1; transform: translateX(0); }
 	  }
 
-	  .container{width:100%;padding:0 1.25rem}
-	  .hero-inner{display:flex;gap:3rem;padding: 2rem 0;align-items:center}
-	  .hero-content h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; }
+	  .container{width:100%;max-width:1200px;margin:0 auto;padding:0 1.25rem}
+	  .hero-inner{display:flex;gap:3rem;padding: 6rem 0;align-items:center}
+	  .hero-content h1 { font-size: 4rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 1.5rem; line-height: 1.1; }
 	  
+	  /* Full height info blocks */
+	  .info-block {
+	    min-height: 80vh;
+	    display: flex;
+	    align-items: center;
+	    padding: 4rem 0;
+	    opacity: 0;
+	    transform: translateY(50px);
+	    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+	  }
+	  .info-block.visible {
+	    opacity: 1;
+	    transform: translateY(0);
+	  }
+	  
+	  /* Parallax and extra hover depth */
+	  .info-block .block-visual span {
+	    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+	    display: inline-block;
+	  }
+	  .info-block:hover .block-visual span {
+	    transform: scale(1.2) translateY(-10px);
+	  }
+
+	  .info-block:nth-child(even) .block-content { order: 2; }
+	  .info-block:nth-child(even) .block-visual { order: 1; }
+	  
+	  .block-grid {
+	    display: grid;
+	    grid-template-columns: 1fr 1fr;
+	    gap: 4rem;
+	    align-items: center;
+	    width: 100%;
+	  }
+	  .block-content h2 { font-size: 2.5rem; font-weight: 800; color: var(--black); margin-bottom: 1.5rem; }
+	  .block-content p { font-size: 1.2rem; line-height: 1.7; color: var(--muted); margin-bottom: 2rem; }
+	  
+	  .block-visual {
+	    background: rgba(22, 163, 74, 0.04);
+	    border: 1px solid rgba(22, 163, 74, 0.1);
+	    border-radius: 30px;
+	    aspect-ratio: 16/10;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    font-size: 5rem;
+	    box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+	    position: relative;
+	    overflow: hidden;
+	    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+	  }
+	  .info-block:hover .block-visual {
+	    transform: scale(1.05) rotate(1deg);
+	    background: rgba(22, 163, 74, 0.08);
+	    box-shadow: 0 40px 80px rgba(22, 163, 74, 0.12);
+	  }
+	  .info-block .block-content {
+	    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+	  }
+	  .info-block:hover .block-content {
+	    transform: translateX(10px);
+	  }
+	  .info-block:nth-child(even):hover .block-content {
+	    transform: translateX(-10px);
+	  }
+
+	  .block-visual::after {
+	    content: '';
+	    position: absolute;
+	    width: 150%;
+	    height: 150%;
+	    background: radial-gradient(circle, rgba(22, 163, 74, 0.08) 0%, transparent 70%);
+	    z-index: -1;
+	  }
+
 	  .hero-media{width:460px;flex-shrink:0}
 	  .media-box{height:320px;border-radius:20px;display:flex;align-items:center;justify-content:center;color:var(--muted);background:rgba(22, 163, 74, 0.06); border: 1px solid rgba(22, 163, 74, 0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
 	  
-	  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem; margin-top: 2rem;}
-	  .card.feature{ background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 20px; padding: 2rem; cursor:pointer;transition:all .3s cubic-bezier(0.16, 1, 0.3, 1)}
-	  .card.feature:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,0,0,0.08); background: rgba(255, 255, 255, 0.9); }
-	  .card.feature h4 { color: var(--green-600); font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem; }
+	  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem; margin-top: 2rem; margin-bottom: 4rem;}
+	  .card.feature{ background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 20px; padding: 2.5rem; cursor:pointer; transition:all .4s cubic-bezier(0.16, 1, 0.3, 1)}
+	  .card.feature:hover{transform:translateY(-12px) scale(1.02); box-shadow:0 30px 60px rgba(0,0,0,0.1); background: rgba(255, 255, 255, 0.9); border-color: var(--green-400); }
+	  .card.feature h4 { color: var(--black); font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; transition: color 0.3s ease; }
+	  .card.feature:hover h4 { color: var(--green-600); }
+	  .card.feature p { line-height: 1.6; color: var(--muted); font-size: 1rem; }
 	  
 	  .card.feature.expanded{grid-column:1 / -1;background:rgba(22,163,74,0.03)}
 	  
@@ -117,6 +196,7 @@
 	</style>
 </head>
 <body>
+	<div id="three-canvas-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none;"></div>
 	<div class="bg-animation">
 		<div class="circle"></div>
 		<div class="circle"></div>
@@ -142,10 +222,18 @@
 					<div class="container hero-inner">
 						<div class="hero-content">
 							<h1>Welcome to Korax</h1>
-							<p class="lead">A lightweight platform to manage your workflows and collaborate seamlessly. This is a starter page — replace this text with your platform's mission and value propositions.</p>				</div>
+							<p class="lead">The future of peer-to-peer learning. Master skills by teaching others, earn credits for your expertise, and build a verifiable career path based on real performance.</p>
+							<div class="hero-actions" style="display:flex; gap:1rem; margin-top:2rem;">
+								<a href="../login_signup/login.html" class="btn btn--primary" style="padding: 1rem 2rem; border-radius: 14px; text-decoration: none; background: var(--green-500); color: white; font-weight: 700;">Start Learning</a>
+								<a href="../employer_login/emp_login.html" class="btn" style="padding: 1rem 2rem; border-radius: 14px; text-decoration: none; border: 1px solid var(--green-600); color: var(--green-600); font-weight: 700;">Hire Capable Talent</a>
+							</div>
+						</div>
 						<div class="hero-media">
-							<!-- Placeholder illustration: replace with project screenshot or SVG -->
-							<div class="media-box">Illustration / screenshot</div>
+							<!-- Placeholder illustration -->
+							<div class="media-box" style="padding: 2rem; text-align: center;">
+								<div style="font-size: 4rem; margin-bottom: 1rem;">🎓 ↔️ 💡</div>
+								<div style="font-weight: 800; color: var(--green-600);">Peer-to-Peer Knowledge Exchange</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -153,22 +241,52 @@
 		</section>
 	</main>
 
-	<!-- Features: add or remove cards as necessary -->
-	<section id="features" class="features container">
-		<h3>Key features</h3>
-		<div class="grid">
-			<article class="card feature">
-				<h4>Fast setup</h4>
-				<p>Get started quickly with sensible defaults and an intuitive UI.</p>
-			</article>
-			<article class="card feature">
-				<h4>Collaboration</h4>
-				<p>Invite teammates, assign tasks, and keep everyone in sync.</p>
-			</article>
-			<article class="card feature">
-				<h4>Secure</h4>
-				<p>Built with best practices for authentication and data protection.</p>
-			</article>
+	<!-- Full Page Information Blocks -->
+	<section class="info-sections">
+		<!-- Block 1: Teach to Learn -->
+		<div class="info-block container">
+			<div class="block-grid">
+				<div class="block-content">
+					<h2>Mastery Through Teaching</h2>
+					<p>Deepen your knowledge by explaining complex concepts to others. At Korax, we believe the best way to master a skill is to teach it. Join a community where knowledge sharing is the primary engine for growth.</p>
+					<div class="badge" style="display:inline-block; padding: 0.5rem 1rem; background: rgba(22, 163, 74, 0.1); color: var(--green-600); border-radius: 20px; font-weight: 700;">Learner-Led Ecosystem</div>
+				</div>
+				<div class="block-visual"><span>👨‍🏫</span></div>
+			</div>
+		</div>
+
+		<!-- Block 2: Affordable 1-to-1 -->
+		<div class="info-block container">
+			<div class="block-grid">
+				<div class="block-content">
+					<h2>On-Demand Expertise</h2>
+					<p>Get personalized 1-to-1 learning from skilled peers who have already walked your path. No more expensive traditional tutoring—just direct access to the help you need, right when you need it.</p>
+				</div>
+				<div class="block-visual"><span>💡</span></div>
+			</div>
+		</div>
+
+		<!-- Block 3: Verifiable Proof -->
+		<div class="info-block container">
+			<div class="block-grid">
+				<div class="block-content">
+					<h2>Proof of Performance</h2>
+					<p>Resumes tell stories; Korax shows reality. Every interaction is recorded as verifiable performance data. Build a career profile backed by continuous feedback and real-world teaching signals.</p>
+					<p>Recruiters can see exactly how you handle problem-solving and communication in high-pressure situations.</p>
+				</div>
+				<div class="block-visual"><span>📊</span></div>
+			</div>
+		</div>
+
+		<!-- Block 4: Credit System -->
+		<div class="info-block container">
+			<div class="block-grid">
+				<div class="block-content">
+					<h2>The Credit Economy</h2>
+					<p>Earn by teaching, spend to learn. Our self-sustaining credit system ensures that consistent contributors are rewarded. We even kickstart your journey with free starter credits to get your first lesson.</p>
+				</div>
+				<div class="block-visual"><span>💳</span></div>
+			</div>
 		</div>
 	</section>
 
