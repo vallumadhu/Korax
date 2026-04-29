@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Ask Skills - Korax</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/ask_skills.css">
+	<link rel="stylesheet" href="../css/global_nav.css">
+</head>
+<body>
+	<main class="auth-page">
+		<section class="auth-card">
+			<p class="eyebrow">Step 2</p>
+			<h1>Skills You Can Teach</h1>
+			<p class="subtitle">Pick skills from the list and verify.</p>
+
+			<form id="skillsForm" class="auth-form" novalidate>
+				<label for="skillInput">Type a Skill</label>
+				<div class="autocomplete-wrapper">
+					<input id="skillInput" type="text" name="skill" placeholder="Search for skills..." autocomplete="off">
+					<button type="button" id="dropdownArrow" class="dropdown-arrow">
+						<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+					</button>
+					<ul id="suggestionsList" class="suggestions-list" hidden></ul>
+				</div>
+
+				<ul id="selectedSkills" class="selected-skills" aria-live="polite"></ul>
+
+				<button type="submit" class="cta-btn">Verify Skills</button>
+				<p id="status" class="status" aria-live="polite"></p>
+			</form>
+		</section>
+	</main>
+
+	<script src="../js/global_nav.js" defer></script>
+	<script src="../js/ask_skills.js" defer></script>
+</body> 
+</html>
+
+

@@ -1,0 +1,36 @@
+/* employe_login.css 
+   Extends sign_in.css for the employer portal
+*/
+
+.auth-card h1 {
+    color: #16a34a; /* Ensure brand green */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.cta-btn:hover {
+    background: #16a34a;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(22, 163, 74, 0.25);
+}
+
+.message {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.message.success {
+    color: #16a34a;
+}
+
+.message.error {
+    color: #ef4444;
+}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Marketplace - Korax</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/marketplace.css">
+	<link rel="stylesheet" href="../css/global_nav.css">
+</head>
+
+<body>
+	<main class="market-page">
+		<section class="market-card">
+			<div class="top-row">
+				<div>
+					<p class="eyebrow">Marketplace</p>
+					<h1>Explore Courses</h1>
+					<p class="subtitle">Choose a course and buy it with credits.</p>
+				</div>
+				<button id="backBtn" class="btn">Back to Profile</button>
+			</div>
+
+			<div class="search-wrap">
+				<label for="courseSearch">Search Courses</label>
+				<input id="courseSearch" type="text" placeholder="Search by course or teacher" autocomplete="off" />
+			</div>
+
+			<div id="courseGrid" class="course-grid"></div>
+			<p id="emptyState" class="empty-state" hidden>No courses found for your search.</p>
+		</section>
+	</main>
+
+	<script src="../js/global_nav.js" defer></script>
+	<script src="../js/marketplace.js" defer></script>
+</body>
+
+</html>

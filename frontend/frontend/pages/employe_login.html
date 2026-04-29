@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employer Login - CoLearn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/sign_in.css">
+  <link rel="stylesheet" href="../css/employe_login.css">
+</head>
+
+<body class="auth-body">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="eyebrow">Employer Portal</div>
+      <h1>Welcome back</h1>
+      <p class="subtitle">Access the recruiter dashboard</p>
+
+      <form id="employer-login-form" class="auth-form" autocomplete="off">
+        <div class="form-group">
+          <label for="company-name">Company Name</label>
+          <input type="text" id="company-name" name="company-name" placeholder="Enter company name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="company-code">Company Code</label>
+          <input type="text" id="company-code" name="company-code" placeholder="Enter registration code" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Work Email</label>
+          <input type="email" id="email" name="email" placeholder="hr@company.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-wrap">
+            <input type="password" id="password" name="password" placeholder="••••••••" required minlength="6" />
+          </div>
+        </div>
+
+        <button type="submit" class="cta-btn">Employer Log in</button>
+      </form>
+      <div id="emp-message" class="message" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <script src="../js/employe_login.js"></script>
+</body>
+
+</html>

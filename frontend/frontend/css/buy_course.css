@@ -1,0 +1,502 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background-image: url('../assets/image-mesh-gradient.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Ensures background stretches properly */
+  color: #1f2f2b;
+  padding: 24px;
+  position: relative;
+}
+
+.buy-page {
+  max-width: 980px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.buy-card {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+  padding: 26px;
+}
+
+.hero-panel {
+  margin-bottom: 14px;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #0ea5a4;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #16a34a;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #5e6e65;
+}
+
+.layout {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.booking-layout {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 12px;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.panel h2 {
+  font-size: 1rem;
+  color: #1f2f2b;
+}
+
+.course-wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.slideshow {
+  height: 140px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(22, 163, 74, 0.25);
+  background: #ecfdf3;
+}
+
+.slideshow.giant {
+  height: 380px;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  background: #eefcf3;
+}
+
+.slide-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.45s ease;
+}
+
+.slide {
+  min-width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 2rem;
+  letter-spacing: 0.03em;
+  color: #166534;
+  text-align: center;
+  padding: 16px;
+}
+
+.slide-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.slide-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(22, 163, 74, 0.3);
+}
+
+.slide-dot.active {
+  background: #16a34a;
+}
+
+.buy-card.theme-python .slideshow.giant {
+  background: #ecfdf3;
+}
+.buy-card.theme-web-dev .slideshow.giant {
+  background: #eff6ff;
+}
+.buy-card.theme-dsa .slideshow.giant {
+  background: #f0fdfa;
+}
+.buy-card.theme-java .slideshow.giant {
+  background: #fff7ed;
+}
+.buy-card.theme-ui-ux .slideshow.giant {
+  background: #f8f4ff;
+}
+
+.course-text {
+  display: grid;
+  gap: 6px;
+}
+
+.course-text h3,
+#teacherName {
+  font-size: 1.02rem;
+  color: #1f2f2b;
+}
+
+.meta {
+  font-size: 0.88rem;
+  color: #5e6e65;
+}
+
+.cost {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #166534;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.45;
+}
+
+.teacher-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #16a34a, #0ea5a4);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.schedule-form {
+  display: grid;
+  gap: 8px;
+}
+
+.schedule-form label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #5e6e65;
+}
+
+.schedule-form input,
+.schedule-form select,
+#meetLink {
+  width: 100%;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 0.92rem;
+  color: #1f2f2b;
+  background: #fff;
+}
+
+.status {
+  min-height: 20px;
+  font-size: 0.9rem;
+  color: #5e6e65;
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.panel-subtle {
+  color: #5e6e65;
+  font-size: 0.84rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.day-cell {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
+  min-height: 86px;
+  padding: 6px;
+  font-size: 0.82rem;
+  color: #374151;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.day-cell.muted {
+  color: #9aa6bf;
+  background: rgba(15, 23, 42, 0.02);
+}
+
+.day-cell.has-item {
+  border-color: rgba(22, 163, 74, 0.45);
+  box-shadow: inset 0 0 0 1px rgba(22, 163, 74, 0.2);
+  cursor: pointer;
+}
+
+.day-cell.selected {
+  outline: 2px solid #16a34a;
+  outline-offset: -2px;
+}
+
+.day-number {
+  font-weight: 700;
+  line-height: 1;
+}
+
+.event-pill {
+  border: 1px solid rgba(22, 163, 74, 0.45);
+  border-radius: 8px;
+  background: rgba(22, 163, 74, 0.08);
+  padding: 3px 5px;
+  font-size: 0.68rem;
+  line-height: 1.2;
+  color: #166534;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meet-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.right-stack {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.chat-messages {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 10px;
+  padding: 10px;
+  height: 210px;
+  overflow-y: auto;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  background: #fcfdfc;
+}
+
+.chat-msg {
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  max-width: 92%;
+}
+
+.chat-msg.bot {
+  background: #e7f8ef;
+  border: 1px solid #bbebcf;
+  justify-self: start;
+}
+
+.chat-msg.user {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  justify-self: end;
+}
+
+.chat-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.chat-form input {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 0.9rem;
+}
+
+.btn {
+  border: 2px solid #16a34a;
+  color: #16a34a;
+  background: transparent;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  background: #16a34a;
+  color: #fff;
+}
+
+/* Feedback Section CSS */
+.feedback-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.rating-display {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #16a34a;
+  line-height: 1;
+}
+
+.rating-max {
+  font-size: 1rem;
+  color: #5e6e65;
+  font-weight: 600;
+}
+
+.stars-visual {
+  display: flex;
+  gap: 4px;
+  color: #16a34a;
+  font-size: 1.8rem;
+  height: 2.2rem;
+}
+
+.stars-visual .star {
+  position: relative;
+  display: inline-block;
+  color: #e5e7eb; /* empty star (gray-200) */
+}
+
+.stars-visual .star-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  color: #16a34a; /* filled star */
+  white-space: nowrap;
+}
+
+.rating-slider {
+  width: 100%;
+  accent-color: #16a34a;
+  cursor: pointer;
+  margin: 6px 0;
+}
+
+.feedback-textarea {
+  width: 100%;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 0.9rem;
+  min-height: 70px;
+  resize: vertical;
+  font-family: inherit;
+  color: #1f2f2b;
+}
+
+.feedback-textarea:focus {
+  outline: 2px solid #16a34a;
+  outline-offset: -1px;
+}
+
+.feedback-container .btn {
+  width: 100%;
+}
+
+.disabled-feedback {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(100%);
+  user-select: none;
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .course-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .slideshow {
+    height: 120px;
+  }
+
+  .slideshow.giant {
+    height: 270px;
+  }
+
+  .top-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .chat-form {
+    grid-template-columns: 1fr;
+  }
+
+  .slide {
+    font-size: 1.45rem;
+  }
+}
+
+/* Subtle Animation */
+

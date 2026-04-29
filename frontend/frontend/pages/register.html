@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Register - Korax</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/register.css">
+</head>
+
+<body>
+	<main class="auth-page">
+		<section class="auth-card">
+			<p class="eyebrow">Get Started</p>
+			<h1>Create Account</h1>
+			<p class="subtitle">Join the Teach, Earn, Learn ecosystem.</p>
+
+			<form id="signupForm" class="auth-form" novalidate>
+				<label for="name">Full Name</label>
+				<input id="name" name="name" type="text" placeholder="Jane Doe" required>
+
+				<label for="age">Age</label>
+				<input id="age" name="age" type="number" min="1" max="120" placeholder="28" required>
+
+				<label for="qualification">Qualification</label>
+				<input id="qualification" name="qualification" type="text" placeholder="B.Sc Computer Science" required>
+
+				<label for="email">Email</label>
+				<input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+				<label for="password">Password</label>
+				<div class="password-wrap">
+					<input id="password" name="password" type="password" placeholder="Create password" required
+						minlength="6">
+					<button id="togglePwd" type="button"> <svg width="22" height="22" viewBox="0 0 24 24"
+							stroke="currentColor" fill="none">
+							<path d="M1 12s4-6 11-6 11 6 11 6-4 6-11 6-11-6-11-6z" />
+							<circle cx="12" cy="12" r="3" />
+						</svg>
+				</div>
+
+				<label for="description">Short Description</label>
+				<textarea id="description" name="description" rows="3" placeholder="Tell us about yourself"></textarea>
+
+				<button type="submit" class="cta-btn">Register</button>
+				<p id="error" class="error" aria-live="polite"></p>
+			</form>
+
+			<p class="switch-link">Already registered? <a href="sign_in.html">Sign in</a></p>
+		</section>
+	</main>
+
+	<script src="../js/register.js" defer></script>
+	<script src="../frontend_api/register.js" type="module" defer></script>
+</body>
+
+</html>

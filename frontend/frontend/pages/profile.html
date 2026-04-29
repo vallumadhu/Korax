@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Profile - Korax</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/profile.css">
+	<link rel="stylesheet" href="../css/global_nav.css">
+</head>
+
+<body>
+	<main class="profile-page">
+		<section class="profile-card">
+			<p class="eyebrow">Profile</p>
+			<h1 id="fullName">User Name</h1>
+			<p id="emailAddr" class="subtitle">user@example.com</p>
+
+			<div class="profile">
+				<div class="avatar" id="avatar"></div>
+				<div class="meta">
+					<div class="profile-grid">
+						<div class="field-card"><strong>Age</strong>
+							<div id="age">-</div>
+						</div>
+						<div class="field-card"><strong>Qualification</strong>
+							<div id="qualification">-</div>
+						</div>
+						<div class="field-card wide"><strong>Description</strong>
+							<div id="description">-</div>
+						</div>
+					</div>
+					<div class="actions-row">
+						<button id="logoutBtn" class="btn">Clear Session</button>
+						<button id="calendarToggleBtn" class="btn">Calendar</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="detail-sections">
+				<section class="panel">
+					<h2>Skills You Can Teach</h2>
+					<div id="teachSkillsList" class="chips"></div>
+				</section>
+
+				<section class="panel">
+					<h2>Skills You Have Learned</h2>
+					<div id="learnedSkillsList" class="chips"></div>
+				</section>
+
+			</div>
+		</section>
+	</main>
+
+	<div id="calendarModal" class="modal hidden">
+		<div class="modal-content">
+			<span id="closeCalendarBtn" class="close-btn">&times;</span>
+			<section id="calendarSection" class="modal-inner-panel">
+				<div class="panel-head">
+					<h2>Schedule</h2>
+					<p id="calendarMonthLabel" class="panel-subtle"></p>
+				</div>
+				<div id="scheduleGrid" class="calendar-grid"></div>
+			</section>
+		</div>
+	</div>
+	<script type="module" src="../js/global_nav.js"></script>
+	<script type="module" src="../js/profile.js"></script>
+</body>
+
+</html>

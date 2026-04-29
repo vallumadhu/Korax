@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Buy Course - Korax</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/buy_course.css">
+	<link rel="stylesheet" href="../css/global_nav.css">
+</head>
+
+<body>
+	<main id="buyCard" class="buy-page buy-card">
+		<div class="top-row">
+			<div>
+				<p class="eyebrow">Course Checkout</p>
+				<h1>Course Purchase Details</h1>
+				<p class="subtitle">Review details and schedule your first meet.</p>
+			</div>
+			<button id="backBtn" class="btn">Back to Marketplace</button>
+		</div>
+
+		<section class="hero-panel" aria-label="Course preview slideshow">
+			<div class="slideshow giant" aria-label="Course slides">
+				<div id="slideTrack" class="slide-track"></div>
+				<div id="slideDots" class="slide-dots"></div>
+			</div>
+		</section>
+
+		<div class="layout">
+			<section class="panel">
+				<h2>Course Details</h2>
+				<div class="course-wrap">
+					<div class="course-text">
+						<h3 id="courseName">Course Name</h3>
+						<p id="courseMeta" class="meta">Teacher • Rating • Duration</p>
+						<p id="courseCost" class="cost">0 credits</p>
+						<p id="courseDescription" class="description">Course description goes here.</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="panel">
+				<h2>Teacher Profile</h2>
+				<div class="teacher-profile">
+					<div id="teacherAvatar" class="avatar">T</div>
+					<div>
+						<h3 id="teacherName">Teacher Name</h3>
+						<p id="teacherTitle" class="meta">Teacher role</p>
+						<p id="teacherRating" class="meta">Rating: 0 / 5</p>
+					</div>
+				</div>
+				<p id="teacherBio" class="description">Teacher bio goes here.</p>
+			</section>
+		</div>
+
+		<div class="booking-layout">
+			<section class="panel">
+				<div class="panel-head">
+					<h2>Teacher Availability Calendar</h2>
+					<p id="calendarMonthLabel" class="panel-subtle"></p>
+				</div>
+				<div id="scheduleGrid" class="calendar-grid"></div>
+				<form id="scheduleForm" class="schedule-form" novalidate>
+					<label for="meetTime">Choose Available Time</label>
+					<select id="meetTime" required>
+						<option value="">Select a day first</option>
+					</select>
+
+					<label for="meetNote">Note (optional)</label>
+					<input id="meetNote" type="text" placeholder="Any preference for the teacher?">
+
+					<button type="submit" class="btn">Save Meet Slot</button>
+				</form>
+				<p id="scheduleStatus" class="status" aria-live="polite"></p>
+			</section>
+
+			<div class="right-stack">
+				<section class="panel">
+					<h2>Generate Meet Link</h2>
+					<p class="meta">Frontend placeholder: backend API integration will be added later.</p>
+					<div class="meet-row">
+						<button id="generateMeetBtn" type="button" class="btn">Generate Meet</button>
+						<a id="meetLink" href="#" target="_blank" rel="noopener noreferrer">Meet link will appear here</a>
+					</div>
+				</section>
+
+				<section class="panel">
+					<h2>Course Chat</h2>
+					<div id="courseChatMessages" class="chat-messages"></div>
+					<form id="courseChatForm" class="chat-form" novalidate>
+						<input id="courseChatInput" type="text" placeholder="Ask a question about the course"
+							autocomplete="off">
+						<button type="submit" class="btn">Send</button>
+					</form>
+				</section>
+
+				<section class="panel disabled-feedback" id="feedbackPanel">
+					<h2>Rate This Course</h2>
+					<div class="feedback-container">
+						<div class="rating-display">
+							<span id="ratingValue">2.5</span> <span class="rating-max">/ 5</span>
+						</div>
+						<div class="stars-visual" id="starsVisual" aria-hidden="true"></div>
+						
+						<label for="ratingSlider" class="sr-only">Course Rating Slider</label>
+						<input type="range" id="ratingSlider" class="rating-slider" min="0" max="5" step="0.1" value="2.5" />
+						
+						<label for="feedbackText" class="sr-only">Provide written feedback</label>
+						<textarea id="feedbackText" class="feedback-textarea" placeholder="Write your feedback (optional)"></textarea>
+						
+						<button type="button" class="btn" id="submitFeedbackBtn">Submit Feedback</button>
+					</div>
+				</section>
+			</div>
+		</div>
+	</main>
+
+	<script src="../js/global_nav.js" defer></script>
+	<script src="../js/buy_course.js" defer></script>
+</body>
+
+</html>

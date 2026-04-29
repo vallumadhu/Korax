@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Skill - Korax</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/verify_skills.css">
+    <link rel="stylesheet" href="../css/global_nav.css">
+</head>
+<body>
+    <main class="verify-page">
+        <div class="verify-container">
+            <header class="verify-header">
+                <div class="header-left">
+                    <p class="eyebrow">Skill Validation</p>
+                    <h1 id="skill-title">Verifying Skill...</h1>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-text">Course Progress: <span id="progress-percent">0%</span></div>
+                    <div class="progress-bar-bg">
+                        <div id="progress-bar-fill" class="progress-bar-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="verify-layout">
+                <!-- Sidebar Navigation -->
+                <aside class="module-sidebar">
+                    <div class="module-item active" data-module="1">
+                        <span class="module-number">01</span>
+                        <span class="module-name">Fundamentals</span>
+                        <span class="status-icon">○</span>
+                    </div>
+                    <div class="module-item locked" data-module="2">
+                        <span class="module-number">02</span>
+                        <span class="module-name">Advanced Concepts</span>
+                        <span class="status-icon">🔒</span>
+                    </div>
+                    <div class="module-item locked" data-module="3">
+                        <span class="module-number">03</span>
+                        <span class="module-name">Practical Application</span>
+                        <span class="status-icon">🔒</span>
+                    </div>
+                    <div class="module-item locked" data-module="4">
+                        <span class="module-number">04</span>
+                        <span class="module-name">Troubleshooting</span>
+                        <span class="status-icon">🔒</span>
+                    </div>
+                    <div class="module-item locked" data-module="5">
+                        <span class="module-number">05</span>
+                        <span class="module-name">Final Assessment</span>
+                        <span class="status-icon">🔒</span>
+                    </div>
+                </aside>
+
+                <!-- Content Area -->
+                <section class="module-content-card">
+                    <div id="module-display" class="module-display">
+                        <div class="module-header">
+                            <h2 id="current-module-title">Module 1: Fundamentals</h2>
+                            <p id="module-description">Learn the core principles and basic building blocks of this skill.</p>
+                        </div>
+                        
+                        <!-- Quiz Section -->
+                        <div id="quiz-section" class="quiz-section">
+                            <h3>Theoretical Question</h3>
+                            <div class="question-container">
+                                <p id="quiz-question">Loading question...</p>
+                                <textarea id="quiz-answer-input" class="text-answer-input" placeholder="Type your explanation here..."></textarea>
+                                <div id="quiz-feedback" class="feedback-msg hidden"></div>
+                                <div class="section-footer">
+                                    <button id="submit-quiz-btn" class="secondary-btn">Submit Answer</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Code Section -->
+                        <div id="code-section" class="code-section">
+                            <h3>Coding Challenge</h3>
+                            <div class="code-container">
+                                <p id="code-instruction">Loading challenge...</p>
+                                <textarea id="code-input" class="code-input" placeholder="Type your code here..."></textarea>
+                                <div id="code-feedback" class="feedback-msg hidden"></div>
+                                <div class="section-footer">
+                                    <button id="run-code-btn" class="secondary-btn run-btn">Run Code</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-footer">
+                            <button id="complete-btn" class="cta-btn">Complete & Next Module</button>
+                        </div>
+                    </div>
+
+                    <!-- Final Success View (Hidden by default) -->
+                    <div id="final-success" class="final-success hidden">
+                        <div class="success-icon">🏆</div>
+                        <h2>Verification Complete!</h2>
+                        <p>You have successfully mastered all 5 modules. Your skill is now verified and will appear on your profile with a proof-of-performance badge.</p>
+                        <button onclick="window.location.href='profile.html'" class="cta-btn">Return to Profile</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/global_nav.js" defer></script>
+    <script src="../js/verify_skills.js" defer></script>
+</body>
+</html>

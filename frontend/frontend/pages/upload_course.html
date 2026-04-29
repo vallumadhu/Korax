@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Upload Course - Korax</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/upload_course.css">
+	<link rel="stylesheet" href="../css/global_nav.css">
+</head>
+
+<body>
+	<main class="upload-page">
+		<section class="upload-card">
+			<div class="header-text">
+				<p class="eyebrow">Instructor Portal</p>
+				<h1>Upload New Course</h1>
+				<p class="subtitle">Provide video content, presentation slides, and details to publish.</p>
+			</div>
+
+			<form id="uploadCourseForm" class="upload-form">
+				<!-- COURSE DETAILS -->
+				<div class="form-section">
+					<h3 class="section-title">Course Details</h3>
+					<div class="input-group">
+						<label for="courseTitle">Course Title <span class="require-field">*</span></label>
+						<input type="text" id="courseTitle" placeholder="e.g. Master Advanced Python" required>
+					</div>
+
+					<div class="input-group">
+						<label for="courseDesc">Description <span class="require-field">*</span></label>
+						<textarea id="courseDesc" rows="3" placeholder="What will students learn in this course?"
+							required></textarea>
+					</div>
+
+					<div class="form-row">
+						<div class="input-group">
+							<label for="courseSkills">Skill Names<span class="require-field">*</span></label>
+							<select id="courseSkills"></select>
+						</div>
+					</div>
+				</div>
+
+				<!-- MEDIA UPLOADS -->
+				<div class="form-section">
+					<h3 class="section-title">Media Content</h3>
+
+					<div class="upload-grid-main">
+						<!-- VIDEO UPLOAD -->
+						<div class="input-group visual-group">
+							<label>1. Main Video Lecture</label>
+							<div class="drop-zone" id="videoDropZone">
+								<input type="file" id="videoInput" accept="video/*" hidden>
+								<div class="dz-content" id="videoContent">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+										stroke-width="1.5" stroke="currentColor">
+										<path stroke-linecap="round"
+											d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+									</svg>
+									<p>Drag video or click to browse</p>
+									<span>MP4, WebM (Max 500MB)</span>
+								</div>
+								<div class="preview-container" id="videoPreviewContainer"></div>
+							</div>
+						</div>
+
+						<!-- THUMBNAIL UPLOAD -->
+						<div class="input-group visual-group">
+							<label>2. Thumbnail Cover (16:9) <span class="require-field">*</span></label>
+							<div class="drop-zone ratio-16-9" id="thumbDropZone">
+								<input type="file" id="thumbInput" accept="image/*" hidden>
+								<div class="dz-content" id="thumbContent">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+										stroke-width="1.5" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round"
+											d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+									</svg>
+									<p>Upload Cover Image</p>
+								</div>
+								<div class="preview-container" id="thumbPreviewContainer"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- SLIDES UPLOAD -->
+				<div class="form-section">
+					<h3 class="section-title">Course Slides (Max 4 Images)</h3>
+					<div class="slides-grid">
+
+						<!-- Slide 1 -->
+						<div class="drop-zone slide-zone" id="slideZone1">
+							<input type="file" id="slideInput1" accept="image/*" hidden>
+							<div class="dz-content" id="slideContent1">
+								<span>Slide 1</span>
+							</div>
+							<div class="preview-container" id="slidePreview1"></div>
+						</div>
+
+						<!-- Slide 2 -->
+						<div class="drop-zone slide-zone" id="slideZone2">
+							<input type="file" id="slideInput2" accept="image/*" hidden>
+							<div class="dz-content" id="slideContent2">
+								<span>Slide 2</span>
+							</div>
+							<div class="preview-container" id="slidePreview2"></div>
+						</div>
+
+						<!-- Slide 3 -->
+						<div class="drop-zone slide-zone" id="slideZone3">
+							<input type="file" id="slideInput3" accept="image/*" hidden>
+							<div class="dz-content" id="slideContent3">
+								<span>Slide 3</span>
+							</div>
+							<div class="preview-container" id="slidePreview3"></div>
+						</div>
+
+						<!-- Slide 4 -->
+						<div class="drop-zone slide-zone" id="slideZone4">
+							<input type="file" id="slideInput4" accept="image/*" hidden>
+							<div class="dz-content" id="slideContent4">
+								<span>Slide 4</span>
+							</div>
+							<div class="preview-container" id="slidePreview4"></div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="form-actions">
+					<button type="submit" class="btn-submit">Publish Course</button>
+				</div>
+				<div id="successMsg">Course uploaded successfully! Redirecting...</div>
+			</form>
+		</section>
+	</main>
+
+	<script src="../js/global_nav.js" defer></script>
+	<script type="module" src="../js/upload_course.js"></script>
+</body>
+
+</html>

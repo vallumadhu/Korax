@@ -1,0 +1,130 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background-image: url("../assets/image-mesh-gradient.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Ensures background stretches properly */
+  color: #1f2f2b;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  position: relative;
+}
+
+.auth-page {
+  width: 100%;
+  max-width: 460px;
+  z-index: 1;
+}
+
+.auth-card {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(4px);
+  padding: 26px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #0ea5a4;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: #16a34a;
+}
+
+.subtitle {
+  color: #5e6e65;
+  margin-bottom: 18px;
+}
+
+.auth-form {
+  display: grid;
+  gap: 10px;
+}
+
+.auth-form label {
+  font-size: 0.9rem;
+  color: #5e6e65;
+  font-weight: 600;
+}
+
+.auth-form input {
+  width: 100%;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 12px;
+  font-size: 0.95rem;
+}
+
+.password-wrap {
+  display: flex;
+  gap: 8px;
+}
+
+#togglePwd {
+  border: 1px solid #16a34a;
+  color: #16a34a;
+  background: transparent;
+  border-radius: 12px;
+  padding: 0 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cta-btn {
+  margin-top: 8px;
+  border: 2px solid #16a34a;
+  color: #16a34a;
+  background: transparent;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.cta-btn:hover {
+  background: #16a34a;
+  color: #fff;
+}
+
+.error {
+  min-height: 20px;
+  color: #dc2626;
+  font-size: 0.9rem;
+}
+
+.switch-link {
+  margin-top: 10px;
+  color: #5e6e65;
+  font-size: 0.92rem;
+}
+
+.switch-link a {
+  color: #16a34a;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+#eyeIcon {
+  width: 20px;
+  height: 20px;
+}
