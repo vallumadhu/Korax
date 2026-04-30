@@ -1,0 +1,30 @@
+<textarea id="code" placeholder="Write your Python code here"></textarea>
+<br><br>
+<button onclick="runCode()">Run</button>
+
+<h3>Output:</h3>
+<pre id="output"></pre>
+
+<script>
+async function runCode() {
+    const code = document.getElementById("code").value;
+
+    const res = await fetch("http://127.0.0.1:8000/run_code", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            code: code,
+            test_cases: [
+                { input: "1 2", expected: "3" },
+                { input: "5 7", expected: "12" }
+            ]
+        })
+    });
+
+    const data = await res.json();
+
+    // 👇 SHOW RESULT ON SCREEN
+    document.getElementById("output").innerText =
+        JSON.stringify(data, null, 2);
+}
+</script>

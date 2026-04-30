@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eye Tracking Feed</title>
+    <style>
+        #container {
+            position: relative;
+            width: 400px;
+        }
+        video, canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #info {
+            margin-top: 420px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Eye Tracking Feed</h2>
+
+<div id="container">
+    <video id="video" autoplay playsinline width="400"></video>
+    <canvas id="overlay"></canvas>
+</div>
+
+<div id="info">Gaze: -</div>
+
+<script>
+const video = document.getElementById("video");
+const canvas = document.getElementById("overlay");
+const ctx = canvas.getContext("2d");
+const info = document.getElementById("info");
+
+// 1. Access webcam
+navigator.mediaDevices.getUserMedia({ video: { width: 400, height: 300 } })
+    .then(stream => {
+        video.srcObject = stream;
+    });
+
+// 2. Hidden capture canvas
+const captureCanvas = document.createElement("canvas");
+const captureCtx = captureCanvas.getContext("2d");
+
+// 3. Send + Receive loop
+async function sendFrame() {
+    captureCanvas.width = video.videoWidth;
+    captureCanvas.height = video.videoHeight;
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    captureCtx.drawImage(video, 0, 0);
+
+    captureCanvas.toBlob(async (blob) => {
+        const formData = new FormData();
+        formData.append("frame", blob, "frame.jpg");
+
+        try {
+            const res = await fetch("http://127.0.0.1:8000/track-eyes", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await res.json();
+
+            // 👉 Clear overlay
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (data.status === "ok") {
+                const [lx, ly] = data.left_iris;
+                const [rx, ry] = data.right_iris;
+
+                // 👉 Draw iris points
+                ctx.fillStyle = "red";
+                ctx.beginPath();
+                ctx.arc(lx, ly, 5, 0, 2 * Math.PI);
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(rx, ry, 5, 0, 2 * Math.PI);
+                ctx.fill();
+
+                // 👉 Show gaze
+                info.innerText = "Gaze: " + data.gaze;
+            } else {
+                info.innerText = "No face detected";
+            }
+
+        } catch (err) {
+            console.error("Error:", err);
+        }
+    }, "image/jpeg", 0.6);
+
+    setTimeout(sendFrame, 100); // ~10 FPS
+}
+
+video.onloadedmetadata = () => {
+    sendFrame();
+};
+</script>
+
+</body>
+</html>

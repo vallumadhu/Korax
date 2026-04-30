@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="../css/global_nav.css">
 </head>
 <body>
+    <div id="loading-screen">
+        <div class="loader"></div>
+        <p id="loading-message">Preparing your test...</p>
+    </div>
+    <div id="eye-tracker">
+        <video id="video" autoplay playsinline></video>
+        <canvas id="overlay"></canvas>
+        <div id="gaze-info">Gaze: -</div>
+    </div>
     <main class="verify-page">
         <div class="verify-container">
             <header class="verify-header">
@@ -82,8 +91,10 @@
                                 <p id="code-instruction">Loading challenge...</p>
                                 <textarea id="code-input" class="code-input" placeholder="Type your code here..."></textarea>
                                 <div id="code-feedback" class="feedback-msg hidden"></div>
+                                <div id="code-results" class="code-results hidden"></div>
                                 <div class="section-footer">
-                                    <button id="run-code-btn" class="secondary-btn run-btn">Run Code</button>
+                                    <button id="run-code-btn" class="secondary-btn run-btn">Run</button>
+                                    <button id="test-code-btn" class="secondary-btn run-btn" style="margin-left:8px;">Test Code</button>
                                 </div>
                             </div>
                         </div>

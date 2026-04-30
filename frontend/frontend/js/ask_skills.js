@@ -10,31 +10,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const status = document.getElementById('status');
 
 	const selectedSkills = [];
-	let staticSkills = [];
-
-	async function fetchSkills() {
-		try {
-			const res = await fetch(`${BASE_URL}/skills`);
-			if (!res.ok) throw new Error("Failed to fetch skills");
-			return await res.json();
-		} catch (err) {
-			console.error("Error fetching skills:", err);
-			return [];
-		}
-	}
-
-	const data = await fetchSkills();
-
-	staticSkills = data.length > 0 ? data.map(skill => ({
-		value: skill.id,
-		label: skill.skill_name
-	})) : [
+	let staticSkills = [
 		{ value: 'python', label: 'Python' },
 		{ value: 'java', label: 'Java' },
-		{ value: 'html', label: 'HTML' },
 		{ value: 'javascript', label: 'JavaScript' },
-		{ value: 'other', label: 'Other' }
+		{ value: 'html_css', label: 'HTML & CSS' },
+		{ value: 'dsa', label: 'Data Structures & Algorithms' }
 	];
+
+	// read selected skill when needed; UI title not present on this page
 
 	console.log("SKILLS:", staticSkills);
 
@@ -45,6 +29,34 @@ document.addEventListener('DOMContentLoaded', async () => {
 		return skill ? skill.label : value;
 	}
 
+	async function fetchSubtopics(skill) {
+		const res = await fetch(`${BASE_URL}/get_5_subtopics`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				prompt: `Give 5 subtopics for ${skill}`
+			})
+		});
+
+		return await res.json();
+	}
+
+	async function fetchQuestions(skill, subtopic) {
+		const res = await fetch(`${BASE_URL}/get_questions`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				topic: skill,
+				subtopic: subtopic
+			})
+		});
+
+		return await res.json();
+	}
 
 
 	function renderSkills() {
@@ -133,24 +145,45 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	function addSkill(skillValue) {
 		status.textContent = '';
-		
-		if (selectedSkills.includes(skillValue)) {
+
+		if (selectedSkills.length > 0) {
 			status.style.color = '#dc2626';
-			status.textContent = 'That skill is already added.';
-		} else {
-			selectedSkills.push(skillValue);
-			renderSkills();
+			status.textContent = 'You can select only ONE skill.';
+			return;
 		}
-		
+
+		selectedSkills.push(skillValue);
+		renderSkills();
+
 		skillInput.value = '';
 		suggestionsList.hidden = true;
 		skillInput.focus();
 	}
+	// Persist only when user submits (moved into submit handler)
 
 	skillInput.addEventListener('input', (e) => {
 		dropdownArrow.classList.remove('open');
 		renderSuggestions(e.target.value.trim());
 	});
+	
+	async function init() {
+		const selectedSkill = localStorage.getItem('selectedSkill');
+
+		// 1. Get subtopics
+		const subtopicData = await fetchSubtopics(selectedSkill);
+
+		subtopics = subtopicData.subtopics || [];
+
+		// 2. Get questions for each subtopic
+		for (let sub of subtopics) {
+			const q = await fetchQuestions(selectedSkill, sub);
+			questions.push(q);
+		}
+
+		updateUI();
+	}
+
+	init();
 
 	dropdownArrow.addEventListener('click', (e) => {
 		e.stopPropagation();
@@ -209,9 +242,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 		status.style.color = '#16a34a';
 		status.textContent = `Skills verified: ${selectedSkills.length} selected.`;
 
-		localStorage.setItem('selectedSkills', JSON.stringify(selectedSkills));
+		localStorage.setItem('selectedSkill', selectedSkills[0]);
 		window.location.href = 'verify_skills.html';
 	});
+	
 
 	renderSkills();
 });
