@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Call</title>
+    <link rel="stylesheet" href="player.css" />
+</head>
+
+<body>
+
+    <body>
+        <div class="container">
+
+            <video id="remoteVideo" autoplay playsinline></video>
+
+            <div class="local-wrapper">
+                <video id="localVideo" autoplay muted playsinline></video>
+            </div>
+            <div class="controls">
+                <button id="toggleAudio" class="btn">
+                    <img id="audioIcon" src="../icons/microphone-solid-full.svg">
+                </button>
+
+                <button id="endCall" class="btn end">
+                    <img src="../icons/phone-slash-solid-full.svg">
+                </button>
+
+                <button id="toggleVideo" class="btn">
+                    <img id="videoIcon" src="../icons/video-solid-full.svg">
+                </button>
+            </div>
+
+        </div>
+    </body>
+
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="player.js"></script>
+</body>
+
+</html>
