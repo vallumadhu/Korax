@@ -144,8 +144,8 @@ function start() {
     track.enabled = !track.enabled;
 
     audioIcon.src = track.enabled
-      ? "../icons/microphone-solid-full.svg"
-      : "../icons/microphone-slash-solid-full.svg";
+      ? "../assets/icons/microphone-solid-full.svg"
+      : "../assets/icons/microphone-slash-solid-full.svg";
   };
 
   videoBtn.onclick = () => {
@@ -155,8 +155,8 @@ function start() {
     track.enabled = !track.enabled;
 
     videoIcon.src = track.enabled
-      ? "../icons/video-solid-full.svg"
-      : "../icons/video-slash-solid-full.svg";
+      ? "../assets/icons/video-solid-full.svg"
+      : "../assets/icons/video-slash-solid-full.svg";
   };
 
   // --- END CALL (UPLOAD EVERYTHING HERE) ---
@@ -184,7 +184,7 @@ function start() {
       pc.close();
       socket.close();
 
-      window.location.href = "temp.html";
+      window.location.href = "../pages/meeting-ended.html?room=" + roomId;
     }, 1000);
   };
 }

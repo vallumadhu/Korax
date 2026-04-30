@@ -35,6 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			return;
 		}
 
+		const meetingUUID = crypto.randomUUID();
+
 		try {
 			console.log("[publish] payload thumbnail_url:", uploadedMedia.thumbnail);
 			const data = await createSession(token, {
@@ -43,11 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
 				credits_alloted: 10,
 				description: desc,
 				video_url: uploadedMedia.video || "",
-				thumbnail_url: uploadedMedia.thumbnail
+				thumbnail_url: uploadedMedia.thumbnail,
+				meeting_id: meetingUUID
 			});
 
 			successMsg.style.display = "block";
-			successMsg.textContent = `Course uploaded successfully. Session ID: ${data.session_id || "created"}`;
+			successMsg.textContent = `Course uploaded successfully. Meeting ID: ${meetingUUID}`;
 			uploadForm.reset();
 			Object.keys(uploadedMedia).forEach((key) => {
 				uploadedMedia[key] = "";

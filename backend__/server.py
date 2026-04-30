@@ -5,9 +5,11 @@ from supabase import create_client
 from dotenv import load_dotenv
 import os
 import uuid
+load_dotenv(dotenv_path="backend__\.env")
 
 # --- ENV ---
 load_dotenv()
+
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 

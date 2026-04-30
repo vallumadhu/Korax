@@ -54,8 +54,20 @@ document.addEventListener('DOMContentLoaded', () => {
 			window.location.href = 'buy_course.html';
 		});
 
+		const joinBtn = document.createElement('button');
+		joinBtn.type = 'button';
+		joinBtn.className = 'buy-btn';
+		joinBtn.style.marginLeft = '8px';
+		joinBtn.style.background = '#0ea5a4';
+		joinBtn.textContent = 'Join Meeting';
+		joinBtn.addEventListener('click', () => {
+			const roomId = course.meeting_id || 'general';
+			window.location.href = `player.html?room=${roomId}`;
+		});
+
 		buyRow.appendChild(cost);
 		buyRow.appendChild(buyBtn);
+		buyRow.appendChild(joinBtn);
 
 		body.appendChild(name);
 		body.appendChild(teacher);
